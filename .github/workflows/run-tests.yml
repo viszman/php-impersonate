@@ -17,7 +17,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.4]
+        php: [8.3]
         stability: [prefer-lowest, prefer-stable]
 
     name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -43,6 +43,9 @@ jobs:
 
       - name: List Installed Dependencies
         run: composer show -D
+
+      - name: Update Bin Directory permissions
+        run: find bin -type f -exec chmod +x {} \;
 
       - name: Execute tests
         run: vendor/bin/pest --ci

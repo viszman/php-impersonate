@@ -1,5 +1,7 @@
 # PHP-Impersonate
 
+[![Tests](https://img.shields.io/github/actions/workflow/status/hamaadraza/php-impersonate/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/hamaadraza/php-impersonate/actions/workflows/run-tests.yml)
+
 A PHP library for making HTTP requests with browser impersonation. This library uses curl-impersonate to mimic various browsers' network signatures, making it useful for accessing websites that may detect and block automated requests.
 
 ## Platform Requirements
