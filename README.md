@@ -133,15 +133,18 @@ PHP-Impersonate supports mimicking various browsers:
 - `chrome100`
 - `chrome101`
 - `chrome104`
-- `chrome105`
 - `chrome107`
 - `chrome110`
+- `chrome116`
 - `edge99`
 - `edge101`
-- `firefox100`
-- `firefox102`
-- `firefox105`
-- `firefox106`
+- `ff91esr`
+- `ff95`
+- `ff98`
+- `ff100`
+- `ff102`
+- `ff109`
+- `ff117`
 - `safari15_3`
 - `safari15_5`
 
