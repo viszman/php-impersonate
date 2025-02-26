@@ -1,0 +1,72 @@
+{
+    "name": "hamaadraza/php-impersonate",
+    "version": "1.0.0",
+    "description": "A PHP library for making HTTP requests with browser impersonation",
+    "keywords": [
+        "hamaadraza",
+        "php-impersonate"
+    ],
+    "homepage": "https://github.com/hamaadraza/php-impersonate",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hamaad Raza",
+            "email": "hamaadraza9@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.21.1",
+        "spatie/ray": "^1.28"
+    },
+    "autoload": {
+        "psr-4": {
+            "Raza\\PHPImpersonate\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Raza\\PHPImpersonate\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "platform": {
+        "php": ">=8.0",
+        "os": "linux"
+    },
+    "bin": [
+        "bin/curl_chrome99_android",
+        "bin/curl_chrome100",
+        "bin/curl_chrome101",
+        "bin/curl_chrome104",
+        "bin/curl_chrome105",
+        "bin/curl_chrome107",
+        "bin/curl_chrome110",
+        "bin/curl_chrome99",
+        "bin/curl_edge99",
+        "bin/curl_edge101",
+        "bin/curl_firefox100",
+        "bin/curl_firefox102",
+        "bin/curl_firefox105",
+        "bin/curl_firefox106",
+        "bin/curl_safari15_3",
+        "bin/curl_safari15_5"
+    ]
+}
