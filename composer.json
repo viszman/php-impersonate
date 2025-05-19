@@ -1,17 +1,22 @@
 {
-    "name": "hamaadraza/php-impersonate",
+    "name": "viszman/php-impersonate",
     "version": "1.0.0",
     "description": "A PHP library for making HTTP requests with browser impersonation",
     "keywords": [
-        "hamaadraza",
+        "viszman",
         "php-impersonate"
     ],
-    "homepage": "https://github.com/hamaadraza/php-impersonate",
+    "homepage": "https://github.com/viszman/php-impersonate",
     "license": "MIT",
     "authors": [
         {
             "name": "Hamaad Raza",
             "email": "hamaadraza9@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Daniel Klimowicz",
+            "email": "viszman9@gmail.com",
             "role": "Developer"
         }
     ],
