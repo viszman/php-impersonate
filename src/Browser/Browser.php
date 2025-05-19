@@ -55,14 +55,14 @@ class Browser implements BrowserInterface
 
         foreach ($paths as $path) {
             // For absolute paths, check if file exists
-            if (strpos($path, '/') === 0 && file_exists($path) && is_executable($path)) {
+            if (str_starts_with($path, '/') && file_exists($path) && is_executable($path)) {
                 $this->executablePath = $path;
 
                 return;
             }
 
             // For PATH-based executables, use 'which' command
-            if (strpos($path, '/') !== 0) {
+            if (! str_starts_with($path, '/')) {
                 $result = shell_exec("which $path 2>/dev/null");
                 if ($result && trim($result) && file_exists(trim($result))) {
                     $this->executablePath = trim($result);

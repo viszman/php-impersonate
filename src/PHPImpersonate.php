@@ -2,6 +2,7 @@
 
 namespace Raza\PHPImpersonate;
 
+use Exception;
 use Raza\PHPImpersonate\Browser\Browser;
 use Raza\PHPImpersonate\Browser\BrowserInterface;
 use Raza\PHPImpersonate\Exception\RequestException;
@@ -25,7 +26,7 @@ class PHPImpersonate implements ClientInterface
         private array $curlOptions = []
     ) {
         // Check if running on Linux
-        if (PHP_OS !== 'Linux' && strpos(PHP_OS, 'Linux') === false) {
+        if (PHP_OS !== 'Linux' && ! str_contains(PHP_OS, 'Linux')) {
             throw new RequestException(
                 'PHP-Impersonate requires a Linux operating system. Current OS: ' . PHP_OS
             );
@@ -100,8 +101,7 @@ class PHPImpersonate implements ClientInterface
         $headers = $this->normalizeHeaders($headers);
 
         // Check if JSON content type is specified
-        $isJson = isset($headers['Content-Type']) &&
-                  strpos($headers['Content-Type'], 'application/json') !== false;
+        $isJson = isset($headers['Content-Type']) && str_contains($headers['Content-Type'], 'application/json');
 
         // Encode data appropriately based on Content-Type
         $body = null;
@@ -144,8 +144,7 @@ class PHPImpersonate implements ClientInterface
         $headers = $this->normalizeHeaders($headers);
 
         // Check if JSON content type is specified
-        $isJson = isset($headers['Content-Type']) &&
-                  strpos($headers['Content-Type'], 'application/json') !== false;
+        $isJson = isset($headers['Content-Type']) && str_contains($headers['Content-Type'], 'application/json');
 
         // Encode data appropriately
         $body = null;
@@ -395,8 +394,7 @@ class PHPImpersonate implements ClientInterface
         // Add request body if present
         if ($body !== null) {
             // Check if it's JSON data
-            $isJson = isset($headers['Content-Type']) &&
-                      strpos($headers['Content-Type'], 'application/json') !== false;
+            $isJson = isset($headers['Content-Type']) && str_contains($headers['Content-Type'], 'application/json');
 
             if ($isJson) {
                 // Create temporary file for the data
@@ -524,9 +522,13 @@ class PHPImpersonate implements ClientInterface
         fclose($pipes[1]);
         fclose($pipes[2]);
 
+        if (! is_resource($process)) {
+            // Handle invalid process resource
+            throw new Exception("Invalid process resource");
+        }
+
         // Get exit code
         $exitCode = proc_close($process);
-
         // Process output
         $output = array_filter(explode("\n", $outputContent));
         $errorOutput = array_filter(explode("\n", $errorContent));
@@ -537,10 +539,13 @@ class PHPImpersonate implements ClientInterface
         }
 
         $lastLine = end($output);
+        if (! $errorContent) {
+            $exitCode = 0;
+        }
 
         if ($exitCode !== 0) {
             // For HEAD requests specifically, we'll be more lenient
-            if (strpos($command, '-X HEAD') !== false &&
+            if (str_contains($command, '-X HEAD') &&
                 is_numeric($lastLine) &&
                 ((int)$lastLine >= 200 && (int)$lastLine < 400)) {
                 // This is likely a successful HEAD request despite the non-zero exit code
@@ -616,7 +621,7 @@ class PHPImpersonate implements ClientInterface
             if (is_numeric($key)) {
                 // If it contains a colon, it's already formatted
                 if (is_string($value) && strpos($value, ':') !== false) {
-                    list($headerName, $headerValue) = array_map('trim', explode(':', $value, 2));
+                    [$headerName, $headerValue] = array_map('trim', explode(':', $value, 2));
                     $normalized[$headerName] = $headerValue;
                 }
             } else {
