@@ -34,6 +34,13 @@ class Browser implements BrowserInterface
         return $this->name;
     }
 
+    public static function getImpersonateBrowsers(): array
+    {
+        $reflection = new \ReflectionClass(self::class);
+
+        return $reflection->getConstants();
+    }
+
     /**
      * Resolve the executable path for the browser
      *
