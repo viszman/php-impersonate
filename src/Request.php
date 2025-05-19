@@ -111,7 +111,7 @@ class Request
      *
      * @return self
      */
-    public static function post(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
+    public static function post(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig = null): self
     {
         return new self('POST', $url, $headers, $body, $proxyConfig);
     }
@@ -150,7 +150,7 @@ class Request
      *
      * @return self
      */
-    public static function patch(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
+    public static function patch(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig = null): self
     {
         return new self('PATCH', $url, $headers, $body, $proxyConfig);
     }
@@ -165,7 +165,7 @@ class Request
      *
      * @return self
      */
-    public static function put(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
+    public static function put(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig = null): self
     {
         return new self('PUT', $url, $headers, $body, $proxyConfig);
     }

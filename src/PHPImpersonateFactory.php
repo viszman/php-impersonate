@@ -2,6 +2,7 @@
 
 namespace Raza\PHPImpersonate;
 
+use Raza\PHPImpersonate\Browser\BrowserInterface;
 use Raza\PHPImpersonate\Exception\RequestException;
 
 /**
@@ -24,7 +25,7 @@ class PHPImpersonateFactory
         string $url,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);
@@ -49,7 +50,7 @@ class PHPImpersonateFactory
         ?array $data = null,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);
@@ -72,7 +73,7 @@ class PHPImpersonateFactory
         string $url,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);
@@ -95,7 +96,7 @@ class PHPImpersonateFactory
         string $url,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);
@@ -120,7 +121,7 @@ class PHPImpersonateFactory
         ?array $data = null,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);
@@ -145,7 +146,7 @@ class PHPImpersonateFactory
         ?array $data = null,
         array $headers = [],
         int $timeout = 30,
-        string $browser = 'chrome99_android',
+        string $browser = BrowserInterface::CHROME_99_ANDROID,
         array $curlOptions = []
     ): Response {
         $client = new PHPImpersonate($browser, $timeout, $curlOptions);

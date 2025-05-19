@@ -10,7 +10,7 @@ use Raza\PHPImpersonate\Proxy\ProxyConfig;
 
 class PHPImpersonate implements ClientInterface
 {
-    private const DEFAULT_BROWSER = 'chrome99_android';
+    private const DEFAULT_BROWSER = BrowserInterface::CHROME_99_ANDROID;
     private const DEFAULT_TIMEOUT = 30;
 
     private BrowserInterface $browser;
