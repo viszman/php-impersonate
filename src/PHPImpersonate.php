@@ -6,6 +6,7 @@ use Exception;
 use Raza\PHPImpersonate\Browser\Browser;
 use Raza\PHPImpersonate\Browser\BrowserInterface;
 use Raza\PHPImpersonate\Exception\RequestException;
+use Raza\PHPImpersonate\Proxy\ProxyConfig;
 
 class PHPImpersonate implements ClientInterface
 {
@@ -52,6 +53,7 @@ class PHPImpersonate implements ClientInterface
         $url = $request->getUrl();
         $headers = $request->getHeaders();
         $body = $request->getBody();
+        $proxyConfig = $request->getProxyConfig();
 
         $tempFiles = $this->createTempFiles();
 
@@ -62,7 +64,8 @@ class PHPImpersonate implements ClientInterface
                 $tempFiles['body'],
                 $tempFiles['headers'],
                 $headers,
-                $body
+                $body,
+                $proxyConfig
             );
 
             $result = $this->runCommand($command);
@@ -372,14 +375,15 @@ class PHPImpersonate implements ClientInterface
         string $outputFile,
         string $headerFile,
         array $headers = [],
-        ?string $body = null
+        ?string $body = null,
+        ?ProxyConfig $proxy = null
     ): string {
         $browserCmd = $this->browser->getExecutablePath();
-
         // Base command with method and URL
         $cmd = sprintf(
-            '%s -s -L -w "%%{http_code}" --max-time %d -o "%s" -D "%s" -X %s',
+            '%s -s -L -w "%%{http_code}" %s --max-time %d  -o "%s" -D "%s" -X %s',
             escapeshellcmd($browserCmd),
+            $proxy ?: '',
             $this->timeout,
             $outputFile,
             $headerFile,

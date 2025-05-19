@@ -2,6 +2,8 @@
 
 namespace Raza\PHPImpersonate;
 
+use Raza\PHPImpersonate\Proxy\ProxyConfig;
+
 class Request
 {
     /**
@@ -14,7 +16,8 @@ class Request
         private string $method,
         private string $url,
         private array $headers = [],
-        private ?string $body = null
+        private ?string $body = null,
+        private ?ProxyConfig $proxyConfig = null
     ) {
     }
 
@@ -101,14 +104,16 @@ class Request
     /**
      * Create a POST request
      *
-     * @param string $url
-     * @param array<string,string> $headers
-     * @param string|null $body
+     * @param string                                      $url
+     * @param array<string,string>                        $headers
+     * @param string|null                                 $body
+     * @param \Raza\PHPImpersonate\Proxy\ProxyConfig|null $proxyConfig
+     *
      * @return self
      */
-    public static function post(string $url, array $headers = [], ?string $body = null): self
+    public static function post(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
     {
-        return new self('POST', $url, $headers, $body);
+        return new self('POST', $url, $headers, $body, $proxyConfig);
     }
 
     /**
@@ -138,26 +143,38 @@ class Request
     /**
      * Create a PATCH request
      *
-     * @param string $url
-     * @param array<string,string> $headers
-     * @param string|null $body
+     * @param string                                      $url
+     * @param array<string,string>                        $headers
+     * @param string|null                                 $body
+     * @param \Raza\PHPImpersonate\Proxy\ProxyConfig|null $proxyConfig
+     *
      * @return self
      */
-    public static function patch(string $url, array $headers = [], ?string $body = null): self
+    public static function patch(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
     {
-        return new self('PATCH', $url, $headers, $body);
+        return new self('PATCH', $url, $headers, $body, $proxyConfig);
     }
 
     /**
      * Create a PUT request
      *
-     * @param string $url
-     * @param array<string,string> $headers
-     * @param string|null $body
+     * @param string                                      $url
+     * @param array<string,string>                        $headers
+     * @param string|null                                 $body
+     * @param \Raza\PHPImpersonate\Proxy\ProxyConfig|null $proxyConfig
+     *
      * @return self
      */
-    public static function put(string $url, array $headers = [], ?string $body = null): self
+    public static function put(string $url, array $headers = [], ?string $body = null, ?ProxyConfig $proxyConfig): self
     {
-        return new self('PUT', $url, $headers, $body);
+        return new self('PUT', $url, $headers, $body, $proxyConfig);
+    }
+
+    /**
+     * @return \Raza\PHPImpersonate\Proxy\ProxyConfig|null
+     */
+    public function getProxyConfig(): ?ProxyConfig
+    {
+        return $this->proxyConfig;
     }
 }
